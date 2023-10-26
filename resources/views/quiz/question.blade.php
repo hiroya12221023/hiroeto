@@ -218,6 +218,7 @@ quizzzz:hover,
             <div class="option" onclick="redirectToAnswer('{{ $displayArray[4] }}')">
                 <span class="highlight"></span>{{ $displayArray[4] }}
             </div>
+               
         </div>
 
         <div class="answerdisplay">

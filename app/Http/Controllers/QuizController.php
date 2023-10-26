@@ -23,7 +23,7 @@ public function generateQuiz(Request $request)
         // 問題文を生成するAPIリクエスト用のメッセージデータを構築
         $questionMessages = [
             ["role" => "system", "content" => "You are a helpful assistant."],
-         ["role" => "user", "content" => "{{ $userInput }}に関連するクイズ問題文を一つ作成してください。さらに回答を四つでそのうちの正解は一つだけ作成してください。出力する際に最初は問題文、半角スペースを付けて次に解答１また半角スペースをつけて解答２また半角スペースをつけて解答３また半角スペースをつけて解答４にしてください。ただし、解答番号と回答の間に空白は入れないでください"]
+         ["role" => "user", "content" => "{{ $userInput }}に関連するクイズ問題文を一つ作成してください。さらに回答を四つでそのうちの正解は一つだけ作成してください。そして、正解1を回答4つの後に一つ追加で表示させてください。出力する際に最初は問題文、半角スペースを付けて次に解答１また半角スペースをつけて解答２また半角スペースをつけて解答３また半角スペースをつけて解答４また、半角スペースをつけて正解1を表示させてください。ただし、解答番号と回答の間に空白は入れないでください"]
         ];
 
         // 問題文を生成するAPIリクエスト
@@ -38,29 +38,29 @@ public function generateQuiz(Request $request)
         $quizQuestion = $questionApiResponse['choices'][0]['message']['content'];
 
         // データベースに問題文を保存
-        $quiz = QuizQuestion::create([
-            'question' => $quizQuestion,
-            'openai_response' => $questionApiResponse, // OpenAIのレスポンスを保存
-        ]);
+       // $quiz = QuizQuestion::create([
+         //   'question' => $quizQuestion,
+         //   'openai_response' => $questionApiResponse, // OpenAIのレスポンスを保存
+        //]);
         
-         DB::beginTransaction();
+         //DB::beginTransaction();
 
-    try {
-        $quiz = QuizQuestion::create([
-            'question' => $quizQuestion,
-            'openai_response' => $questionApiResponse,
-        ]);
+    //try {
+        //$quiz = QuizQuestion::create([
+            //'question' => $quizQuestion,
+            //'openai_response' => $questionApiResponse,
+        //]);
         
 
-        DB::commit();
-    } catch (\Exception $e) {
+        //DB::commit();
+    //} catch (\Exception $e) {
         // エラーが発生した場合はロールバック
-        DB::rollback();
-        throw $e;
-    }
+      //  DB::rollback();
+        //throw $e;
+    //}
     $displayArray = explode(' ',$quizQuestion);
 
-        return view('quiz.question', compact('quizQuestion', 'quiz','displayArray' ));
+        return view('quiz.question', compact('displayArray' ));
     }
 
     // 他のメソッドやロジックもここに追加できます

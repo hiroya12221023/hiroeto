@@ -28,7 +28,7 @@ Route::get('/', function () {
 Route::get('/index', [ResolveController::class, 'index'])->name('index');
 Route::get('/resolve', [ResolveController::class, 'resolve'])->name('resolve');
 Route::get('/quiz', [QuizController::class, 'showQuizForm']);
-Route::get('/generate-quiz', [QuizController::class, 'generateQuiz']);
+Route::post('/generate-quiz', [QuizController::class, 'generateQuiz']);
 Route::get('/write', function () {
     $title = '';
     $content = '';
