@@ -215,7 +215,7 @@ a:hover {
     
       <div class="tomo">  <h2>どんなジャンルでもいいので、単語を一つ入力してください</h2></div>
         <div class="quiz">
-        <form action="/generate-quiz" method="post">
+        <form action="/generate-quiz" method="get">
             @csrf
             <input type="text" name="sentence" placeholder="例：アニメ">      <button type="submit">kuisを生成する</button>
         </form>
